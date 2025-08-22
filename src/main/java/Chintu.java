@@ -7,9 +7,24 @@ public class Chintu {
                 + "| |    | |_| || ||  \\| | | | | | | |\n"
                 + "| |___ |  _  || || |\\  | | | | |_| |\n"
                 + " \\____||_| |_|___|_| \\_| |_|  \\___/ \n";
-        String greetHello = "Hello! I'm Chintu!\n" + "What can I do for you?\n";
-        String greetBye = "Bye! Take care and hope to see you again soon!";
+        String GREET_HELLO = "Hello! I'm Chintu!\n" + "What can I do for you?\n";
+        String GREET_BYE = "Bye! Take care and hope to see you again soon!";
         System.out.println("Hello from\n" + logo);
-        System.out.println(greetHello);
+        System.out.println(GREET_HELLO);
+
+        Scanner sc =  new Scanner(System.in);
+
+        while(true) {
+            String command = sc.nextLine();
+
+            if (command.equals("bye")) {
+                System.out.println(GREET_BYE);
+                break;
+            } else {
+                System.out.println(command);
+            }
+        }
+
+        sc.close();
     }
 }
