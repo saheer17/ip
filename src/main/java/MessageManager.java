@@ -21,7 +21,7 @@ public class MessageManager {
             System.out.println("There are no messages in the system");
         } else {
             for (int i = 0; i < count; i++) {
-                System.out.println((i+1) + "." + messages[i].getContent());
+                System.out.println((i+1) + ". " + messages[i].getContent());
             }
         }
     }

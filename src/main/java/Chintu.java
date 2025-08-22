@@ -9,10 +9,12 @@ public class Chintu {
                 + " \\____||_| |_|___|_| \\_| |_|  \\___/ \n";
         String GREET_HELLO = "Hello! I'm Chintu!\n" + "What can I do for you?\n";
         String GREET_BYE = "Bye! Take care and hope to see you again soon!";
+
         System.out.println("Hello from\n" + logo);
         System.out.println(GREET_HELLO);
 
         Scanner sc =  new Scanner(System.in);
+        MessageManager manager = new MessageManager(100);
 
         while(true) {
             String command = sc.nextLine();
@@ -20,11 +22,13 @@ public class Chintu {
             if (command.equals("bye")) {
                 System.out.println(GREET_BYE);
                 break;
+            } else if (command.equals("list")) {
+                manager.listMessages();
             } else {
-                System.out.println(command);
+                System.out.println("added: " + command);
+                manager.addMessage(command);
             }
         }
-
         sc.close();
     }
 }
