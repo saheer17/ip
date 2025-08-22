@@ -24,7 +24,13 @@ public class Chintu {
                 break;
             } else if (command.equals("list")) {
                 manager.listMessages();
-            } else {
+            } else if (command.startsWith("mark")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
+                manager.markTask(index);
+            } else if ( command.startsWith("unmark")){
+                int index = Integer.parseInt(command.split(" ")[1]);
+                manager.unmarkTask(index);
+            }else {
                 System.out.println("added: " + command);
                 manager.addMessage(command);
             }
