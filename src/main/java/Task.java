@@ -1,7 +1,7 @@
-public class Message {
+public class Task {
     private String content;
 
-    public Message(String content) {
+    public Task(String content) {
         this.content = content;
     }
 

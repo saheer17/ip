@@ -1,9 +1,9 @@
-public class MessageManager {
-    private Message[] messages;
+public class TaskManager {
+    private Task[] tasks;
     private int count;
 
-    public MessageManager(int capacity) {
-        messages = new Message[capacity];
+    public TaskManager(int capacity) {
+        tasks = new Task[capacity];
         this.count = 0;
     }
 
@@ -12,7 +12,7 @@ public class MessageManager {
     }
 
     public void addMessage(String content) {
-        messages[count] = new Message(content);
+        tasks[count] = new Task(content);
         count++;
     }
 
@@ -21,7 +21,7 @@ public class MessageManager {
             System.out.println("There are no messages in the system");
         } else {
             for (int i = 0; i < count; i++) {
-                System.out.println((i+1) + ". " + messages[i].getContent());
+                System.out.println((i+1) + ". " + tasks[i].getContent());
             }
         }
     }

@@ -14,7 +14,7 @@ public class Chintu {
         System.out.println(GREET_HELLO);
 
         Scanner sc =  new Scanner(System.in);
-        MessageManager manager = new MessageManager(100);
+        TaskManager manager = new TaskManager(100);
 
         while(true) {
             String command = sc.nextLine();
