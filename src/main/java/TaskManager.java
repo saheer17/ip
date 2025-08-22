@@ -11,15 +11,16 @@ public class TaskManager {
         return count;
     }
 
-    public void addMessage(String content) {
+    public void addTask(String content) {
         tasks[count] = new Task(content);
         count++;
     }
 
-    public void listMessages() {
+    public void listTasks() {
         if (count == 0) {
-            System.out.println("There are no messages in the system");
+            System.out.println("There are no messages in your list");
         } else {
+            System.out.println("Here are the messages in your list:");
             for (int i = 0; i < count; i++) {
                 System.out.println((i+1) + "." + tasks[i].getStatusIcon() + " " + tasks[i].getTask());
             }

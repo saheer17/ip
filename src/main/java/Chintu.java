@@ -7,8 +7,8 @@ public class Chintu {
                 + "| |    | |_| || ||  \\| | | | | | | |\n"
                 + "| |___ |  _  || || |\\  | | | | |_| |\n"
                 + " \\____||_| |_|___|_| \\_| |_|  \\___/ \n";
-        String GREET_HELLO = "Hello! I'm Chintu!\n" + "What can I do for you?\n";
-        String GREET_BYE = "Bye! Take care and hope to see you again soon!";
+        final String GREET_HELLO = "Hello! I'm Chintu!\n" + "What can I do for you?\n";
+        final String GREET_BYE = "Bye! Take care and hope to see you again soon!";
 
         System.out.println("Hello from\n" + logo);
         System.out.println(GREET_HELLO);
@@ -23,16 +23,16 @@ public class Chintu {
                 System.out.println(GREET_BYE);
                 break;
             } else if (command.equals("list")) {
-                manager.listMessages();
+                manager.listTasks();
             } else if (command.startsWith("mark")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 manager.markTask(index);
-            } else if ( command.startsWith("unmark")){
+            } else if (command.startsWith("unmark")){
                 int index = Integer.parseInt(command.split(" ")[1]);
                 manager.unmarkTask(index);
             }else {
                 System.out.println("added: " + command);
-                manager.addMessage(command);
+                manager.addTask(command);
             }
         }
         sc.close();
