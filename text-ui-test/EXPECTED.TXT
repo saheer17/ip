@@ -1,7 +1,62 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+  ____  _   _ ___ _   _ _____ _   _
+ / ___|| | | |_ _| \ | |_   _| | | |
+| |    | |_| || ||  \| | | | | | | |
+| |___ |  _  || || |\  | | | | |_| |
+ \____||_| |_|___|_| \_| |_|  \___/
 
+Hello! I'm Chintu!
+What can I do for you?
+
+Refer to the following instructions to use me!
+Enter command 'list' to list out all existing tasks
+To add a todo task, enter a command in the following manner:
+todo [TASK]
+eg: todo homework
+To add a deadline task, enter a command in the following manner:
+deadline [TASK] /by [DEADLINE TIME]
+eg: deadline homework /by 3pm
+To add an event task, enter a command in the following manner:
+event [TASK] /from [START TIME] /to [END TIME]
+eg: event wedding /from august 12pm /to 3pm
+To mark or unmark an event as done, enter 'mark' or 'unmark' followed by task number
+eg: mark 3
+Enter command 'bye' to exit Chintu
+
+Command unclear, refer to instructions above
+Got it. I've added this task:
+  [T][ ] homework
+Now, you have 1 tasks in your list
+Got it. I've added this task:
+  [E][ ] hockey match (from: 4pm to: 9pm)
+Now, you have 2 tasks in your list
+Here are the tasks in your list:
+1.[T][ ] homework
+2.[E][ ] hockey match (from: 4pm to: 9pm)
+Got it. I've added this task:
+  [D][ ] cs2113 assignment (by: TODAY)
+Now, you have 3 tasks in your list
+Here are the tasks in your list:
+1.[T][ ] homework
+2.[E][ ] hockey match (from: 4pm to: 9pm)
+3.[D][ ] cs2113 assignment (by: TODAY)
+Nice! I have marked this task as done:
+  [X] hockey match (from: 4pm to: 9pm)
+Here are the tasks in your list:
+1.[T][ ] homework
+2.[E][X] hockey match (from: 4pm to: 9pm)
+3.[D][ ] cs2113 assignment (by: TODAY)
+Nice! I have marked this task as done:
+  [X] cs2113 assignment (by: TODAY)
+Here are the tasks in your list:
+1.[T][ ] homework
+2.[E][X] hockey match (from: 4pm to: 9pm)
+3.[D][X] cs2113 assignment (by: TODAY)
+Ok, I have marked this task as not done yet:
+  [ ] cs2113 assignment (by: TODAY)
+Here are the tasks in your list:
+1.[T][ ] homework
+2.[E][X] hockey match (from: 4pm to: 9pm)
+3.[D][ ] cs2113 assignment (by: TODAY)
+Command unclear, refer to instructions above
+Bye! Take care and hope to see you again soon!
