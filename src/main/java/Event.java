@@ -1,8 +1,8 @@
 public class Event extends Task{
 
-    protected String startTime;
-    protected String endTime;
-    protected final static String TASK_SYMBOL = "[E]";
+    private String startTime;
+    private String endTime;
+    private final static String TASK_SYMBOL = "[E]";
 
     public Event(String content, String startTime, String endTime) {
         super(content);

@@ -1,7 +1,8 @@
 public class Task {
+
     protected String content;
     protected boolean isDone;
-    protected String TASK_SYMBOL = "[ ]";
+    private final String TASK_SYMBOL = "[ ]";
 
     public Task(String content) {
         this.content = content;
