@@ -23,13 +23,14 @@ public class Chintu {
                 + "To mark or unmark an event as done, enter 'mark' or 'unmark' followed by task number\n"
                 + "eg: mark 3\n"
                 + "Enter command 'bye' to exit Chintu\n";
+        final int LIST_CAPACITY = 100;
 
         System.out.println("Hello from\n" + logo);
         System.out.println(GREET_HELLO);
         System.out.println(INSTRUCTIONS);
 
         Scanner sc =  new Scanner(System.in);
-        TaskManager manager = new TaskManager(100);
+        TaskManager manager = new TaskManager(LIST_CAPACITY);
 
         while(true) {
             String command = sc.nextLine();
@@ -46,8 +47,8 @@ public class Chintu {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 manager.unmarkTask(index);
             }else {
-                boolean successfullyAddedTask = manager.addTask(command);
-                if (successfullyAddedTask){
+                manager.addTask(command);
+                if (manager.getIsTaskAdded()){
                     manager.printRecentlyAddedTask();
                 } else {
                     System.out.println("Command unclear, refer to instructions above");

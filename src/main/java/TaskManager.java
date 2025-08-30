@@ -1,28 +1,33 @@
 public class TaskManager {
     private Task[] tasks;
     private int count;
+    private boolean isTaskAdded;
 
     public TaskManager(int capacity) {
         tasks = new Task[capacity];
         this.count = 0;
+        this.isTaskAdded = false;
     }
 
     public int getCount() {
         return count;
     }
 
-    public boolean addTask(String content) {
-        String taskType = content.split(" ")[0];
+    public boolean getIsTaskAdded() {
+        return isTaskAdded;
+    }
+
+    public void addTask(String content) {
+        String[] words = content.split(" ", 2); //Split first word (task type) from rest of content
+        String taskType = words[0]; // First word indicates task type
         switch (taskType) {
         case "todo":
-            String[] toDoWords = content.split(" ",2); //Split first word (task type) from rest of content
-            String toDoDescription = toDoWords[1]; // Rest of content is to do task description
+            String toDoDescription = words[1]; // Rest of content is to do task description
             tasks[count] = new ToDo(toDoDescription);
             break;
 
         case "event":
-            String[] eventWords = content.split(" ",2); //Split first word (task type) from rest of content
-            String[] eventParts =  eventWords[1].split("/",3); // Split rest of content by '/'
+            String[] eventParts =  words[1].split("/",3); // Split rest of content by '/'
             String eventDescription = eventParts[0].trim(); // First part is task description
             String eventStartTime = eventParts[1].trim(); // Second part is start time of event
             String eventEndTime = eventParts[2].trim(); // Third part is end time of event
@@ -30,17 +35,17 @@ public class TaskManager {
             break;
 
         case "deadline":
-            String[] deadlineWords = content.split(" ",2); // Split first word(task type) from rest of content
-            String[] deadlineParts = deadlineWords[1].split("/", 2); // Split rest of content to before '/' and after
+            String[] deadlineParts = words[1].split("/", 2); // Split rest of content to before '/' and after
             String deadlineDescription = deadlineParts[0].trim(); // First part is task description
             String deadlineTime = deadlineParts[1].trim(); // Second part is task deadline
             tasks[count] = new Deadline(deadlineDescription, deadlineTime);
             break;
         default:
-            return false;
+            isTaskAdded = false;
+            return;
         }
         count++;
-        return true;
+        isTaskAdded = true;
     }
 
     public void printRecentlyAddedTask(){
