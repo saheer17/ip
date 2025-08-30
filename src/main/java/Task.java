@@ -1,6 +1,7 @@
 public class Task {
-    private String content;
-    private boolean isDone;
+    protected String content;
+    protected boolean isDone;
+    protected String TASK_SYMBOL = "[ ]";
 
     public Task(String content) {
         this.content = content;
@@ -21,5 +22,9 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]");
+    }
+
+    public String getTaskSymbol(){
+        return TASK_SYMBOL;
     }
 }
