@@ -1,3 +1,10 @@
+package Chintu;
+
+import Chintu.Task.Deadline;
+import Chintu.Task.Event;
+import Chintu.Task.Task;
+import Chintu.Task.ToDo;
+
 public class TaskManager {
     private Task[] tasks;
     private int count;

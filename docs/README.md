@@ -1,4 +1,4 @@
-# Chintu User Guide
+# Chintu.Chintu User Guide
 
 // Update the title above to match the actual product name
 
