@@ -90,13 +90,19 @@ public class TaskManager {
         }
     }
 
-    public void markTask(int index) {
-        tasks[index-1].markDone();
+    public void markTask(int index) throws InvalidTaskNumberException {
+        if (index < 0 || index > count) {
+            throw new InvalidTaskNumberException();
+        }
+        tasks[index - 1].markDone();
         System.out.println("Nice! I have marked this task as done:");
-        System.out.println("  " + tasks[index-1].getStatusIcon() + " " + tasks[index-1].getTask());
+        System.out.println("  " + tasks[index - 1].getStatusIcon() + " " + tasks[index - 1].getTask());
     }
 
-    public void unmarkTask(int index) {
+    public void unmarkTask(int index) throws InvalidTaskNumberException {
+        if (index < 0 || index > count) {
+            throw new InvalidTaskNumberException();
+        }
         tasks[index-1].markUndone();
         System.out.println("Ok, I have marked this task as not done yet:");
         System.out.println("  " + tasks[index-1].getStatusIcon() + " " + tasks[index-1].getTask());

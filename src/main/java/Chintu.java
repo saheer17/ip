@@ -42,10 +42,18 @@ public class Chintu {
                 manager.listTasks();
             } else if (command.startsWith("mark")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
-                manager.markTask(index);
+                try {
+                    manager.markTask(index);
+                } catch (InvalidTaskNumberException e) {
+                    System.out.println(e.getMessage());
+                }
             } else if (command.startsWith("unmark")){
                 int index = Integer.parseInt(command.split(" ")[1]);
-                manager.unmarkTask(index);
+                try {
+                    manager.unmarkTask(index);
+                } catch (InvalidTaskNumberException e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
                 try {
                     manager.addTask(command);

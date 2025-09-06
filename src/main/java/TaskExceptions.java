@@ -15,3 +15,9 @@ class InsufficientInformationException extends TaskException {
         super("Insufficient information for " + taskType + " task. Refer to instructions above");
     }
 }
+
+class InvalidTaskNumberException extends TaskException {
+    public InvalidTaskNumberException() {
+        super("Invalid task number given to mark/unmark task");
+    }
+}
