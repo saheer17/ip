@@ -46,12 +46,12 @@ public class Chintu {
             } else if (command.startsWith("unmark")){
                 int index = Integer.parseInt(command.split(" ")[1]);
                 manager.unmarkTask(index);
-            }else {
-                manager.addTask(command);
-                if (manager.getIsTaskAdded()){
+            } else {
+                try {
+                    manager.addTask(command);
                     manager.printRecentlyAddedTask();
-                } else {
-                    System.out.println("Command unclear, refer to instructions above");
+                } catch (UnknownCommandException | InsufficientInformationException e) {
+                    System.out.println(e.getMessage());
                 }
             }
         }
