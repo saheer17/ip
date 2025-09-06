@@ -1,4 +1,4 @@
-public class Event extends Task{
+public class Event extends Task {
 
     private String startTime;
     private String endTime;
@@ -13,12 +13,12 @@ public class Event extends Task{
     }
 
     @Override
-    public String getTaskSymbol(){
+    public String getTaskSymbol() {
         return TASK_SYMBOL;
     }
 
     @Override
-    public String getTask(){
+    public String getTask() {
         return (super.content + " (from: " +  this.startTime + " to: " +  this.endTime + ")");
     }
 }

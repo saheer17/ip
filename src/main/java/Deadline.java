@@ -1,4 +1,4 @@
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     private String deadline;
     private final static String TASK_SYMBOL = "[D]";
@@ -10,12 +10,12 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String getTaskSymbol(){
+    public String getTaskSymbol() {
         return TASK_SYMBOL;
     }
 
     @Override
-    public String getTask(){
+    public String getTask() {
         return (super.content + " (by: " +  deadline + ")");
     }
 }

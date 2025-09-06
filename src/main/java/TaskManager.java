@@ -17,32 +17,54 @@ public class TaskManager {
         return isTaskAdded;
     }
 
-    public void addTask(String content) {
+    public void addTask(String content) throws InsufficientInformationException, UnknownCommandException {
         String[] words = content.split(" ", 2); //Split first word (task type) from rest of content
         String taskType = words[0]; // First word indicates task type
         switch (taskType) {
         case "todo":
+            if (words.length < 2 || words[1].trim().isEmpty()) {
+                throw new InsufficientInformationException("Todo");
+            }
             String toDoDescription = words[1]; // Rest of content is to do task description
             tasks[count] = new ToDo(toDoDescription);
             break;
 
         case "event":
+            if (words.length < 2 || words[1].trim().isEmpty()) {
+                throw new InsufficientInformationException("Event");
+            }
             String[] eventParts =  words[1].split("/",3); // Split rest of content by '/'
+            if (eventParts.length < 3) {
+                throw new InsufficientInformationException("Event");
+            }
             String eventDescription = eventParts[0].trim(); // First part is task description
             String eventStartTime = eventParts[1].trim(); // Second part is start time of event
             String eventEndTime = eventParts[2].trim(); // Third part is end time of event
+            if (eventDescription.isEmpty() || eventStartTime.isEmpty() || eventEndTime.isEmpty()) {
+                throw new InsufficientInformationException("Event");
+            }
             tasks[count] = new Event(eventDescription, eventStartTime, eventEndTime);
             break;
 
         case "deadline":
+            if (words.length < 2 || words[1].trim().isEmpty()) {
+                throw new InsufficientInformationException("Deadline");
+            }
             String[] deadlineParts = words[1].split("/", 2); // Split rest of content to before '/' and after
+            if (deadlineParts.length < 2) {
+                throw new InsufficientInformationException("Deadline");
+            }
             String deadlineDescription = deadlineParts[0].trim(); // First part is task description
             String deadlineTime = deadlineParts[1].trim(); // Second part is task deadline
+            if (deadlineDescription.isEmpty() || deadlineTime.isEmpty()) {
+                throw new InsufficientInformationException("Deadline");
+            }
             tasks[count] = new Deadline(deadlineDescription, deadlineTime);
             break;
+
         default:
             isTaskAdded = false;
-            return;
+            throw new UnknownCommandException();
         }
         count++;
         isTaskAdded = true;
@@ -68,13 +90,19 @@ public class TaskManager {
         }
     }
 
-    public void markTask(int index) {
-        tasks[index-1].markDone();
+    public void markTask(int index) throws InvalidTaskNumberException {
+        if (index < 0 || index > count) {
+            throw new InvalidTaskNumberException();
+        }
+        tasks[index - 1].markDone();
         System.out.println("Nice! I have marked this task as done:");
-        System.out.println("  " + tasks[index-1].getStatusIcon() + " " + tasks[index-1].getTask());
+        System.out.println("  " + tasks[index - 1].getStatusIcon() + " " + tasks[index - 1].getTask());
     }
 
-    public void unmarkTask(int index) {
+    public void unmarkTask(int index) throws InvalidTaskNumberException {
+        if (index < 0 || index > count) {
+            throw new InvalidTaskNumberException();
+        }
         tasks[index-1].markUndone();
         System.out.println("Ok, I have marked this task as not done yet:");
         System.out.println("  " + tasks[index-1].getStatusIcon() + " " + tasks[index-1].getTask());
