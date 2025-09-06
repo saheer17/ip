@@ -5,7 +5,7 @@ Hello from
 | |___ |  _  || || |\  | | | | |_| |
  \____||_| |_|___|_| \_| |_|  \___/
 
-Hello! I'm Chintu!
+Hello! I'm Chintu.Chintu!
 What can I do for you?
 
 Refer to the following instructions to use me!
@@ -21,7 +21,7 @@ event [TASK] /from [START TIME] /to [END TIME]
 eg: event wedding /from august 12pm /to 3pm
 To mark or unmark an event as done, enter 'mark' or 'unmark' followed by task number
 eg: mark 3
-Enter command 'bye' to exit Chintu
+Enter command 'bye' to exit Chintu.Chintu
 
 Command unclear, refer to instructions above
 Got it. I've added this task:

@@ -1,3 +1,5 @@
+package Chintu;
+
 import java.util.Scanner;
 
 public class Chintu {
