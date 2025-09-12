@@ -36,6 +36,8 @@ public class Chintu {
         Scanner sc =  new Scanner(System.in);
         TaskManager manager = new TaskManager(LIST_CAPACITY);
 
+        manager.loadData();
+
         while(true) {
             String command = sc.nextLine();
 
@@ -69,6 +71,7 @@ public class Chintu {
                 try {
                     manager.addTask(command);
                     manager.printRecentlyAddedTask();
+                    manager.saveData();
                 } catch (UnknownCommandException | InsufficientInformationException e) {
                     System.out.println(e.getMessage());
                 }

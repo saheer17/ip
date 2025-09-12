@@ -5,8 +5,8 @@ public class Deadline extends Task {
     private String deadline;
     private final static String TASK_SYMBOL = "[D]";
 
-    public Deadline(String content, String deadline) {
-        super(content);
+    public Deadline(String content, String deadline, String command) {
+        super(content,command);
         String[] deadlineWords = deadline.split(" ",2);
         this.deadline = deadlineWords[1]; // Ignore 'by' and store only deadline
     }

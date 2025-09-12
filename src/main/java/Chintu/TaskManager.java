@@ -5,6 +5,10 @@ import Chintu.Task.Event;
 import Chintu.Task.Task;
 import Chintu.Task.ToDo;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.util.Scanner;
 
 public class TaskManager {
     private ArrayList<Task> tasks;;
@@ -25,8 +29,8 @@ public class TaskManager {
         return isTaskAdded;
     }
 
-    public void addTask(String content) throws InsufficientInformationException, UnknownCommandException {
-        String[] words = content.split(" ", 2); //Split first word (task type) from rest of content
+    public void addTask(String command) throws InsufficientInformationException, UnknownCommandException {
+        String[] words = command.split(" ", 2); //Split first word (task type) from rest of content
         String taskType = words[0]; // First word indicates task type
 
         switch (taskType) {
@@ -109,6 +113,41 @@ public class TaskManager {
                 System.out.println((i + 1) + "." + t.getTaskSymbol() + t.getStatusIcon()
                         + " " + t.getTask());
             }
+        }
+    }
+
+    public void saveData() {
+        File file = new File("Task_Data.txt");
+        try (FileWriter dataFile = new FileWriter(file, false)) {
+            for (int i = 0; i < count; i++) {
+                dataFile.write(tasks[i].getCommand() + System.lineSeparator());
+            }
+            System.out.println("Tasks saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
+    }
+
+    public void loadData() {
+        File dataFile = new File("Task_Data.txt");
+        count = 0;
+        if (!dataFile.exists()) {
+            System.out.println("No saved tasks found.");
+            return;
+        }
+
+        try (Scanner sc = new Scanner(dataFile)) {
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                try {
+                    addTask(line);
+                } catch (Exception e) {
+                    System.out.println("Skipping invalid task: " + line);
+                }
+            }
+            System.out.println("Tasks loaded successfully");
+        } catch (IOException e) {
+            System.out.println("Error loading tasks: " + e.getMessage());
         }
     }
 
