@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 public class TaskManager {
-    private ArrayList<Task> tasks;;
+    private ArrayList<Task> tasks;
     private int count;
     private boolean isTaskAdded;
 
@@ -39,7 +39,7 @@ public class TaskManager {
                 throw new InsufficientInformationException("Todo");
             }
             String toDoDescription = words[1]; // Rest of content is to do task description
-            tasks.add(new ToDo(toDoDescription));
+            tasks.add(new ToDo(toDoDescription, command));
             break;
 
         case "event":
@@ -56,7 +56,7 @@ public class TaskManager {
             if (eventDescription.isEmpty() || eventStartTime.isEmpty() || eventEndTime.isEmpty()) {
                 throw new InsufficientInformationException("Event");
             }
-            tasks.add(new Event(eventDescription, eventStartTime, eventEndTime));
+            tasks.add(new Event(eventDescription, eventStartTime, eventEndTime, command));
             break;
 
         case "deadline":
@@ -72,7 +72,7 @@ public class TaskManager {
             if (deadlineDescription.isEmpty() || deadlineTime.isEmpty()) {
                 throw new InsufficientInformationException("Deadline");
             }
-            tasks.add(new Deadline(deadlineDescription, deadlineTime));
+            tasks.add(new Deadline(deadlineDescription, deadlineTime, command));
             break;
 
         default:
@@ -84,7 +84,7 @@ public class TaskManager {
     }
 
     public void deleteTask(int taskNumber) throws InvalidDeleteCommandException {
-        if (taskNumber < 0 || taskNumber > count) {
+        if (taskNumber <= 0 || taskNumber > count) {
             throw new InvalidDeleteCommandException();
         }
         Task removedTask = tasks.remove(taskNumber - 1);
@@ -120,7 +120,13 @@ public class TaskManager {
         File file = new File("Task_Data.txt");
         try (FileWriter dataFile = new FileWriter(file, false)) {
             for (int i = 0; i < count; i++) {
-                dataFile.write(tasks[i].getCommand() + System.lineSeparator());
+                String doneIndicator;
+                if (tasks.get(i).isDone()) {
+                    doneIndicator = "X";
+                } else {
+                    doneIndicator = "0";
+                }
+                dataFile.write(doneIndicator + tasks.get(i).getCommand() + System.lineSeparator());
             }
             System.out.println("Tasks saved successfully.");
         } catch (IOException e) {
@@ -139,8 +145,14 @@ public class TaskManager {
         try (Scanner sc = new Scanner(dataFile)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
+                char markIndicator =  line.charAt(0);
+                String commandToAdd = line.substring(1);
                 try {
-                    addTask(line);
+                    addTask(commandToAdd);
+                    if (markIndicator == 'X') {
+                        int taskIndex = count -1;
+                        tasks.get(taskIndex).markDone();
+                    }
                 } catch (Exception e) {
                     System.out.println("Skipping invalid task: " + line);
                 }

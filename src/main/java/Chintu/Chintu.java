@@ -64,6 +64,7 @@ public class Chintu {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 try {
                     manager.deleteTask(index);
+                    manager.saveData();
                 } catch (InvalidDeleteCommandException e) {
                     System.out.println(e.getMessage());
                 }
