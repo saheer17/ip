@@ -23,3 +23,9 @@ class InvalidTaskNumberException extends TaskException {
         super("Invalid task number given to mark/unmark task");
     }
 }
+
+class InvalidDeleteCommandException extends TaskException {
+    public InvalidDeleteCommandException() {
+        super("Invalid delete command, task number does not exist");
+    }
+}

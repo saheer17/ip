@@ -4,14 +4,15 @@ import Chintu.Task.Deadline;
 import Chintu.Task.Event;
 import Chintu.Task.Task;
 import Chintu.Task.ToDo;
+import java.util.ArrayList;
 
 public class TaskManager {
-    private Task[] tasks;
+    private ArrayList<Task> tasks;;
     private int count;
     private boolean isTaskAdded;
 
     public TaskManager(int capacity) {
-        tasks = new Task[capacity];
+        tasks = new ArrayList<>();
         this.count = 0;
         this.isTaskAdded = false;
     }
@@ -27,13 +28,14 @@ public class TaskManager {
     public void addTask(String content) throws InsufficientInformationException, UnknownCommandException {
         String[] words = content.split(" ", 2); //Split first word (task type) from rest of content
         String taskType = words[0]; // First word indicates task type
+
         switch (taskType) {
         case "todo":
             if (words.length < 2 || words[1].trim().isEmpty()) {
                 throw new InsufficientInformationException("Todo");
             }
             String toDoDescription = words[1]; // Rest of content is to do task description
-            tasks[count] = new ToDo(toDoDescription);
+            tasks.add(new ToDo(toDoDescription));
             break;
 
         case "event":
@@ -50,7 +52,7 @@ public class TaskManager {
             if (eventDescription.isEmpty() || eventStartTime.isEmpty() || eventEndTime.isEmpty()) {
                 throw new InsufficientInformationException("Event");
             }
-            tasks[count] = new Event(eventDescription, eventStartTime, eventEndTime);
+            tasks.add(new Event(eventDescription, eventStartTime, eventEndTime));
             break;
 
         case "deadline":
@@ -66,7 +68,7 @@ public class TaskManager {
             if (deadlineDescription.isEmpty() || deadlineTime.isEmpty()) {
                 throw new InsufficientInformationException("Deadline");
             }
-            tasks[count] = new Deadline(deadlineDescription, deadlineTime);
+            tasks.add(new Deadline(deadlineDescription, deadlineTime));
             break;
 
         default:
@@ -77,11 +79,23 @@ public class TaskManager {
         isTaskAdded = true;
     }
 
+    public void deleteTask(int taskNumber) throws InvalidDeleteCommandException {
+        if (taskNumber < 0 || taskNumber > count) {
+            throw new InvalidDeleteCommandException();
+        }
+        Task removedTask = tasks.remove(taskNumber - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + removedTask.getTaskSymbol() + removedTask.getStatusIcon()
+                + " " + removedTask.getTask());
+        count--;
+        System.out.println("You now have " + count + " tasks left. Good job on completing it!");
+    }
+
     public void printRecentlyAddedTask(){
         System.out.println("Got it. I've added this task:");
-        int recentTaskIndex = count - 1;
-        System.out.println("  " + tasks[recentTaskIndex].getTaskSymbol() + tasks[recentTaskIndex].getStatusIcon()
-                + " " + tasks[recentTaskIndex].getTask());
+        Task recentTask = tasks.get(tasks.size() - 1);
+        System.out.println("  " + recentTask.getTaskSymbol() + recentTask.getStatusIcon()
+                + " " + recentTask.getTask());
         System.out.println("Now, you have " + getCount() + " tasks in your list");
     }
 
@@ -91,8 +105,9 @@ public class TaskManager {
         } else {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < count; i++) {
-                System.out.println((i+1) + "." +tasks[i].getTaskSymbol() + tasks[i].getStatusIcon()
-                        + " " + tasks[i].getTask());
+                Task t = tasks.get(i);
+                System.out.println((i + 1) + "." + t.getTaskSymbol() + t.getStatusIcon()
+                        + " " + t.getTask());
             }
         }
     }
@@ -101,17 +116,19 @@ public class TaskManager {
         if (index < 0 || index > count) {
             throw new InvalidTaskNumberException();
         }
-        tasks[index - 1].markDone();
+        Task task = tasks.get(index - 1);
+        task.markDone();
         System.out.println("Nice! I have marked this task as done:");
-        System.out.println("  " + tasks[index - 1].getStatusIcon() + " " + tasks[index - 1].getTask());
+        System.out.println(task.getTaskSymbol() + task.getStatusIcon() + " " + task.getTask());
     }
 
     public void unmarkTask(int index) throws InvalidTaskNumberException {
         if (index < 0 || index > count) {
             throw new InvalidTaskNumberException();
         }
-        tasks[index-1].markUndone();
+        Task task = tasks.get(index - 1);
+        task.markUndone();
         System.out.println("Ok, I have marked this task as not done yet:");
-        System.out.println("  " + tasks[index-1].getStatusIcon() + " " + tasks[index-1].getTask());
+        System.out.println(task.getTaskSymbol() + task.getStatusIcon() + " " + task.getTask());
     }
 }
