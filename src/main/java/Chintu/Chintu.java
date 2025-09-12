@@ -24,7 +24,9 @@ public class Chintu {
                 + "eg: event wedding /from august 12pm /to 3pm\n"
                 + "To mark or unmark an event as done, enter 'mark' or 'unmark' followed by task number\n"
                 + "eg: mark 3\n"
-                + "Enter command 'bye' to exit Chintu\n";
+                + "Enter command 'bye' to exit Chintu\n"
+                + "To delete command. enter 'delete' followed by task number\n"
+                + "eg: delete 3\n";
         final int LIST_CAPACITY = 100;
 
         System.out.println("Hello from\n" + logo);
@@ -54,6 +56,13 @@ public class Chintu {
                 try {
                     manager.unmarkTask(index);
                 } catch (InvalidTaskNumberException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (command.startsWith("delete")){
+                int index = Integer.parseInt(command.split(" ")[1]);
+                try {
+                    manager.deleteTask(index);
+                } catch (InvalidDeleteCommandException e) {
                     System.out.println(e.getMessage());
                 }
             } else {

@@ -77,6 +77,23 @@ public class TaskManager {
         isTaskAdded = true;
     }
 
+    public void deleteTask(int taskNumber) throws InvalidDeleteCommandException {
+        if (taskNumber < 0 || taskNumber > count) {
+            throw new InvalidDeleteCommandException();
+        }
+        int taskIndex = taskNumber - 1;
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + tasks[taskIndex].getTaskSymbol() + tasks[taskIndex].getStatusIcon()
+                + " " + tasks[taskIndex].getTask());
+
+        for(int i = taskIndex; i < count - 1; i++) {
+            tasks[i] = tasks[i + 1];
+        }
+        tasks[count - 1] = null;
+        count--;
+        System.out.println("You now have " + count + " tasks left. Good job on completing it!");
+    }
+
     public void printRecentlyAddedTask(){
         System.out.println("Got it. I've added this task:");
         int recentTaskIndex = count - 1;
