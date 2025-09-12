@@ -6,8 +6,8 @@ public class Event extends Task {
     private String endTime;
     private final static String TASK_SYMBOL = "[E]";
 
-    public Event(String content, String startTime, String endTime) {
-        super(content);
+    public Event(String content, String startTime, String endTime, String command) {
+        super(content, command);
         String[] startTimeWords = startTime.split(" ",2);
         this.startTime = startTimeWords[1]; // Ignore 'from' and store only the start time
         String[] endTimeWords = endTime.split(" ",2);

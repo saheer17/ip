@@ -3,11 +3,13 @@ package Chintu.Task;
 public class Task {
 
     protected String content;
+    protected String command;
     protected boolean isDone;
     private final String TASK_SYMBOL = "[ ]";
 
-    public Task(String content) {
+    public Task(String content, String command) {
         this.content = content;
+        this.command = command;
         this.isDone = false;
     }
 
@@ -29,5 +31,9 @@ public class Task {
 
     public String getTaskSymbol(){
         return TASK_SYMBOL;
+    }
+
+    public String getCommand() {
+        return command;
     }
 }

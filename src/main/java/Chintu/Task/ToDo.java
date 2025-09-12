@@ -4,8 +4,8 @@ public class ToDo extends Task {
 
     private final static String TASK_SYMBOL = "[T]";
 
-    public ToDo(String description) {
-        super(description);
+    public ToDo(String description, String command) {
+        super(description, command);
     }
 
     @Override
