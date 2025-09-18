@@ -38,8 +38,10 @@ public class UI {
                 + "To mark or unmark an event as done, enter 'mark' or 'unmark' followed by task number\n"
                 + "eg: mark 3\n"
                 + "Enter command 'bye' to exit Chintu\n"
-                + "To delete command. enter 'delete' followed by task number\n"
-                + "eg: delete 3\n";
+                + "To delete command, enter 'delete' followed by task number\n"
+                + "eg: delete 3\n"
+                + " To find tasks by searching for a keyword, enter 'find' followed by the keyword\n"
+                + "eg: find homework\n";
         System.out.println(INSTRUCTIONS);
     }
 

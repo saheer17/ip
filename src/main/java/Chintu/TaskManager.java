@@ -146,4 +146,29 @@ public class TaskManager {
         System.out.println("Ok, I have marked this task as not done yet:");
         System.out.println(task.getTaskSymbol() + task.getStatusIcon() + " " + task.getTask());
     }
+
+    public void findTasks(String keyword) {
+        if (keyword == null || keyword.isEmpty()) {
+            System.out.println("Please provide a keyword to search");
+            return;
+        }
+
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getTask().toLowerCase().contains(keyword.toLowerCase())) {
+                matchedTasks.add(task);
+            }
+        }
+
+        if (matchedTasks.isEmpty()) {
+            System.out.println("No tasks found containing " + keyword);
+        } else {
+            System.out.println("Here are the matching tasks:");
+            for (int i = 0; i < matchedTasks.size(); i++) {
+                Task t = matchedTasks.get(i);
+                System.out.println((i + 1) + "." + t.getTaskSymbol() + t.getStatusIcon()
+                        + " " + t.getTask());
+            }
+        }
+    }
 }

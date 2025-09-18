@@ -51,6 +51,10 @@ public class Parser {
                 storage.saveData(manager.getTasks());
                 break;
 
+            case "find":
+                manager.findTasks(argument);
+                break;
+
             default:
                 // Everything else is treated as adding a task
                 manager.addTask(command);
