@@ -1,6 +1,6 @@
 package Chintu.Task;
 
-public class Task {
+public abstract class Task {
 
     protected String content;
     protected String command;
