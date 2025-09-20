@@ -1,17 +1,38 @@
 package Chintu;
 
+/**
+ * Parses and handles user commands.
+ * The parser interprets raw command strings and delegates
+ * execution to the {@link TaskManager}, {@link Storage}, or {@link UI}.
+ */
 public class Parser {
 
     private TaskManager manager;
     private Storage storage;
     private UI ui;
 
+    /**
+     * Constructs a parser with the given dependencies.
+     * @param manager Task manager used to handle tasks.
+     * @param storage Storage used for saving and loading tasks.
+     * @param ui      UI for user interaction.
+     */
     public Parser(TaskManager manager, Storage storage, UI ui) {
         this.manager = manager;
         this.storage = storage;
         this.ui = ui;
     }
 
+    /**
+     * Handles the provided user command.
+     * <p>
+     * Commands may include adding, deleting, marking, unmarking,
+     * finding tasks, listing tasks, or exiting the program.
+     *
+     * @param command Raw user command.
+     * @return {@code true} if program should continue running,
+     *         {@code false} if the program should exit.
+     */
     public boolean handleCommand(String command) {
         if (command == null || command.isEmpty()) {
             ui.printMessage("Empty command!");

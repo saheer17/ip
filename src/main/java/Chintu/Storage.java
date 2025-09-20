@@ -7,13 +7,26 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import Chintu.Task.Task;
 
+/**
+ * Handles persistent storage of tasks.
+ * Provides functionality to save tasks to a file and
+ * load tasks from a file into the {@link TaskManager}.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a storage handler with the given file path.
+     * @param filePath Path of the file used for storage.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves all tasks to the storage file.
+     * @param tasks The list of tasks to save.
+     */
     public void saveData(ArrayList<Task> tasks) {
         try (FileWriter dataFile = new FileWriter(filePath, false)) {
             for (Task task : tasks) {
@@ -31,6 +44,12 @@ public class Storage {
         }
     }
 
+
+    /**
+     * Loads tasks from the storage file into the manager.
+     * If the file does not exist, no tasks are loaded.
+     * @param manager The task manager where tasks are loaded.
+     */
     public void loadData(TaskManager manager) {
         File dataFile = new File(filePath);
         if (!dataFile.exists()) {
