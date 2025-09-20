@@ -1,83 +1,40 @@
 package Chintu;
 
-import java.util.Scanner;
-
+/**
+ * Entry point of the Chintu application.
+ * This class sets up the necessary components such as
+ * {@link UI}, {@link TaskManager}, {@link Storage}, and {@link Parser}.
+ * It runs the main loop to continuously accept user commands until exit.
+ */
 public class Chintu {
+    /**
+     * Starts the Chintu program.
+     * Initialises storage, parser, UI, and task manager and then begins
+     * the interactive loop for user commands.
+     * <p>
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
-        final String logo = "  ____  _   _ ___ _   _ _____ _   _ \n"
-                + " / ___|| | | |_ _| \\ | |_   _| | | |\n"
-                + "| |    | |_| || ||  \\| | | | | | | |\n"
-                + "| |___ |  _  || || |\\  | | | | |_| |\n"
-                + " \\____||_| |_|___|_| \\_| |_|  \\___/ \n";
-        final String GREET_HELLO = "Hello! I'm Chintu!\n" + "What can I do for you?\n";
-        final String GREET_BYE = "Bye! Take care and hope to see you again soon!";
-        final String INSTRUCTIONS = "Refer to the following instructions to use me!\n"
-                + "Enter command 'list' to list out all existing tasks\n"
-                + "To add a todo task, enter a command in the following manner:\n"
-                + "todo [TASK]\n"
-                + "eg: todo homework\n"
-                + "To add a deadline task, enter a command in the following manner:\n"
-                + "deadline [TASK] /by [DEADLINE TIME]\n"
-                + "eg: deadline homework /by 3pm\n"
-                + "To add an event task, enter a command in the following manner:\n"
-                + "event [TASK] /from [START TIME] /to [END TIME]\n"
-                + "eg: event wedding /from august 12pm /to 3pm\n"
-                + "To mark or unmark an event as done, enter 'mark' or 'unmark' followed by task number\n"
-                + "eg: mark 3\n"
-                + "Enter command 'bye' to exit Chintu\n"
-                + "To delete command. enter 'delete' followed by task number\n"
-                + "eg: delete 3\n";
-        final int LIST_CAPACITY = 100;
 
-        System.out.println("Hello from\n" + logo);
-        System.out.println(GREET_HELLO);
-        System.out.println(INSTRUCTIONS);
+        final String DATA_FILE = "Task_Data.txt";
 
-        Scanner sc =  new Scanner(System.in);
-        TaskManager manager = new TaskManager(LIST_CAPACITY);
+        UI ui = new UI();
+        TaskManager manager = new TaskManager();
+        Storage storage = new Storage(DATA_FILE);
+        Parser parser = new Parser(manager, storage, ui);
 
-        manager.loadData();
+        ui.printLogo();
+        ui.printGreeting();
+        ui.printInstructions();
 
-        while(true) {
-            String command = sc.nextLine();
+        storage.loadData(manager);
 
-            if (command.equals("bye")) {
-                System.out.println(GREET_BYE);
-                break;
-            } else if (command.equals("list")) {
-                manager.listTasks();
-            } else if (command.startsWith("mark")) {
-                int index = Integer.parseInt(command.split(" ")[1]);
-                try {
-                    manager.markTask(index);
-                } catch (InvalidTaskNumberException e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (command.startsWith("unmark")){
-                int index = Integer.parseInt(command.split(" ")[1]);
-                try {
-                    manager.unmarkTask(index);
-                } catch (InvalidTaskNumberException e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (command.startsWith("delete")){
-                int index = Integer.parseInt(command.split(" ")[1]);
-                try {
-                    manager.deleteTask(index);
-                    manager.saveData();
-                } catch (InvalidDeleteCommandException e) {
-                    System.out.println(e.getMessage());
-                }
-            } else {
-                try {
-                    manager.addTask(command);
-                    manager.printRecentlyAddedTask();
-                    manager.saveData();
-                } catch (UnknownCommandException | InsufficientInformationException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
+        boolean isProgramRunning = true;
+        while (isProgramRunning) {
+            String command = ui.getUserInput();
+            isProgramRunning = parser.handleCommand(command);
         }
-        sc.close();
+
+        ui.closeScanner();
     }
 }
