@@ -46,7 +46,7 @@ public class UI {
     }
 
     public void printBye() {
-        final String GREET_BYE = "Bye! Take care and hope to see you again soon!";
+        final String GREET_BYE = "Bye! Take care and hope to see you soon!";
         System.out.println(GREET_BYE);
     }
 
